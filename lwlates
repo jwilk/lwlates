@@ -161,7 +161,7 @@ def main():
                             html = lxml.html.tostring(elt, encoding='unicode')
                             cache[no] = html
                         text = html2text.html2text(html, bodywidth=999999)
-                        text = re.sub(r'\n\n[*] [*] [*]\n\n.*\bLog in\b.*\bto post comments\b.*\n\n\Z', '', text)
+                        text = re.sub(r'\n\s*---\s*\Z', '', text)
                         for line in text.splitlines():
                             print('>', line)
                         print()
