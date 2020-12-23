@@ -77,7 +77,7 @@ class Cache():
             os.close(self.lock_fd)
             os.lock_fd = None
 
-class UserAgent(object):
+class UserAgent():
 
     ident = 'lwlates (https://github.com/jwilk/lwlates)'
     base_url = 'https://lwn.net/'
