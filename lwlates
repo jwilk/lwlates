@@ -136,8 +136,15 @@ def main():
     )
     login_data = urllib.parse.urlencode(login_data)
     login_data = login_data.encode('ASCII')
-    ua.post('/Login/', data=login_data)
+    need_logout = True
+    data = ua.post('/Login/', data=login_data)
     try:
+        doc = lxml.html.document_fromstring(data)
+        elt = doc.xpath('//h1')[0]
+        if elt.text.startswith('Log in'):
+            need_logout = False
+            print(f'{prog}: error: could not log in', file=sys.stderr)
+            sys.exit(1)
         quser = urllib.parse.quote(user, safe='')
         comments_url = f'/MyAccount/{quser}/comments'
         with Cache() as cache:
@@ -168,7 +175,8 @@ def main():
                     elif text.startswith('Next ') and url.startswith(f'{comments_url}?'):
                         batch_url = url
     finally:
-        ua.get('/Login/logout')
+        if need_logout:
+            ua.get('/Login/logout')
 
 if __name__ == '__main__':
     main()
