@@ -110,7 +110,7 @@ class UserAgent():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--user', metavar='USER', default=getpass.getuser())
+    ap.add_argument('--user', metavar='USER', required=True)
     ap.add_argument('--password-file', metavar='FILE', help='read password from FILE')
     ap.add_argument('--verbose', action='store_true')
     options = ap.parse_args()
