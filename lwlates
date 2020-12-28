@@ -40,12 +40,12 @@ class Cache():
 
     def __enter__(self):
         if self.lock_fd is not None:
-            raise RuntimeError('{self!r} is already locked'.format(self=self))
+            raise RuntimeError(f'{self!r} is already locked')
         self.lock_fd = os.open(self.dir, os.O_RDONLY)
         try:
             fcntl.flock(self.lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
-            print('{prog}: waiting for the lock...'.format(prog=prog), end='', file=sys.stderr)
+            print(f'{prog}: waiting for the lock...', end='', file=sys.stderr)
             sys.stderr.flush()
             fcntl.flock(self.lock_fd, fcntl.LOCK_EX)
             print('', file=sys.stderr)
