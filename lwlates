@@ -120,6 +120,9 @@ def main():
         password = password.rstrip('\n')
     else:
         password = getpass.getpass('LWN.net password: ')
+    if not password:
+        print(f'{prog}: error: empty password', file=sys.stderr)
+        sys.exit(1)
     user = options.user
     ua = UserAgent()
     if options.verbose:
