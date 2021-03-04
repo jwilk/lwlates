@@ -16,7 +16,7 @@ import urllib.request
 import html2text
 import lxml.html
 
-f''  # Python >= 3.6 is required
+0_0  # Python >= 3.6 is required
 
 prog = argparse.ArgumentParser().prog
 
