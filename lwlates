@@ -109,6 +109,12 @@ class UserAgent():
     def post(self, url, *, data):
         return self._request(url, data=data)
 
+def html2md(text):
+    cvtr = html2text.HTML2Text()
+    cvtr.unicode_snob = True
+    cvtr.body_width = 999999
+    return cvtr.handle(text)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--user', metavar='USER', required=True)
@@ -165,7 +171,7 @@ def main():
                             [elt] = doc.xpath('//div[@class="ArticleText"]')
                             html = lxml.html.tostring(elt, encoding='unicode')
                             cache[no] = html
-                        text = html2text.html2text(html, bodywidth=999999)
+                        text = html2md(html)
                         text = re.sub(r'\n\s*---\s*\Z', '', text)
                         for line in text.splitlines():
                             print('>', line)
