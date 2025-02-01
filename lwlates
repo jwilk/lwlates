@@ -151,8 +151,9 @@ def main():
     if options.verbose:
         ua.logging = sys.stderr
     login_data = dict(
-        Username=user,
-        Password=password,
+        uname=user,
+        pword=password,
+        target='/',
     )
     login_data = urllib.parse.urlencode(login_data)
     login_data = login_data.encode('ASCII')
