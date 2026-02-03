@@ -156,6 +156,7 @@ def html2md(text):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.color = False
     ap.add_argument('--user', metavar='USER', required=True)
     ap.add_argument('--password-file', metavar='FILE', help='read password from FILE')
     ap.add_argument('--verbose', action='store_true')
