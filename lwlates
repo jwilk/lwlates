@@ -45,6 +45,8 @@ class Cache:
         path = os.getenv('XDG_CACHE_HOME', '')
         if not path.startswith('/'):
             path = os.path.join(os.path.expanduser('~'), '.cache')
+        if not path.startswith('/'):
+            raise RuntimeError('home dir not found')
         path = os.path.join(path, 'lwlates')
         makedirs700(path)
         return path
